@@ -1,38 +1,110 @@
-.App {
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Body */
+body {
+  background: #eef0ff;
+}
+
+/* Container */
+.container {
   text-align: center;
+  padding: 2rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container h1 {
+  color: #3b2fae;
+  font-size: 2.5rem;
+  margin-bottom: 0.3rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.subtitle {
+  color: #666;
+  margin-bottom: 2rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Cards layout */
+.cards {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  gap: 4rem;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex-wrap: wrap;
+}
+
+/* Card styling */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  height: 400px;
+  width: 400px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card .icon {
+  font-size: 4rem;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.voter .icon {
+  background-color: #e0e0ff;
+  color: #3b2fae;
+}
+
+.candidate .icon {
+  background-color: #f0f7e8;
+  color: #3b7d3b;
+}
+
+.card h2 {
+  margin: 0.5rem 0;
+}
+
+.card p {
+  color: #555;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+/* Buttons */
+.btn {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.95rem;
+  transition: 0.2s;
+}
+
+.btn.primary {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.voter .btn.primary { background-color: #3b2fae; }
+.candidate .btn.primary { background-color: #3b7d3b; }
+
+.btn.secondary {
+  background-color: transparent;
+  border: 2px solid currentColor;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.voter .btn.secondary { color: #3b2fae; }
+.candidate .btn.secondary { color: #3b7d3b; }
+
+.btn:hover {
+  opacity: 0.9;
 }
