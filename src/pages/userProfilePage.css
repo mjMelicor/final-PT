@@ -1,0 +1,389 @@
+.upp-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: #e8eaf6;
+}
+
+.upp-card {
+  width: min(560px, 100%);
+  background: #fff;
+  border: 1px solid #e4e8f0;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 6px 24px rgba(16, 24, 40, 0.08);
+}
+
+.upp-card h1 {
+  margin-bottom: 1rem;
+}
+
+.upp-card p {
+  margin: 0.5rem 0;
+}
+
+.upp-top {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.upp-avatar-wrap {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(59, 91, 219, 0.2);
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.12);
+  cursor: pointer;
+}
+
+.upp-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.upp-avatar-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: rgba(17, 24, 39, 0.55);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.82rem;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.upp-avatar-wrap:hover .upp-avatar-overlay {
+  opacity: 1;
+}
+
+.upp-camera {
+  font-size: 1.05rem;
+}
+
+.upp-head h1 {
+  margin: 0;
+}
+
+.upp-sub {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.upp-pill {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(59, 91, 219, 0.25);
+  background: rgba(59, 91, 219, 0.08);
+  color: #2f4ac0;
+  font-weight: 900;
+  font-size: 0.78rem;
+}
+
+.upp-pill.warn {
+  border-color: rgba(245, 158, 11, 0.3);
+  background: rgba(245, 158, 11, 0.12);
+  color: #92400e;
+}
+
+.upp-info {
+  margin-top: 10px;
+  background: #f9fafb;
+  border: 1px solid #eef2f7;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.upp-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 6px;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.upp-row:last-child {
+  border-bottom: none;
+}
+
+.upp-label {
+  color: #6b7280;
+  font-weight: 700;
+}
+
+.upp-value {
+  color: #111827;
+  font-weight: 800;
+  text-align: right;
+}
+
+.upp-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.upp-btn {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #dbe3f0;
+  background: #fff;
+  color: #1f2937;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+}
+
+.upp-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(17, 24, 39, 0.12);
+}
+
+.upp-btn.primary {
+  border: none;
+  background: #3b5bdb;
+  color: #fff;
+}
+
+.upp-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.upp-note {
+  margin-top: 14px;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.upp-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.upp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.upp-field label {
+  font-weight: 900;
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+.upp-field input,
+.upp-field select,
+.upp-field textarea {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+.upp-field textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.upp-modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.upp-hint {
+  color: #92400e;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.upp-steps {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-weight: 900;
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+.upp-steps span {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.upp-steps span.active {
+  color: #2f4ac0;
+  border-color: rgba(59, 91, 219, 0.25);
+  background: rgba(59, 91, 219, 0.08);
+}
+
+.upp-grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.upp-upload-hint {
+  color: #6b7280;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.upp-upload-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.upp-upload {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  background: #fff;
+}
+
+.upp-upload-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.upp-upload-title {
+  font-weight: 900;
+  color: #111827;
+  font-size: 0.95rem;
+}
+
+.upp-upload-btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(59, 91, 219, 0.25);
+  background: rgba(59, 91, 219, 0.08);
+  color: #2f4ac0;
+  cursor: pointer;
+  font-weight: 900;
+  user-select: none;
+}
+
+.upp-upload-btn input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.upp-upload-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: #6b7280;
+  margin-top: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.upp-upload-file {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.upp-upload-preview {
+  width: 100%;
+  max-height: 170px;
+  object-fit: cover;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid #eef2f7;
+}
+
+.upp-review {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #f9fafb;
+  padding: 12px;
+}
+
+.upp-review-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 6px;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.upp-review-row:last-child {
+  border-bottom: none;
+}
+
+.upp-review-platform {
+  max-width: 280px;
+  text-align: right;
+}
+
+.upp-check {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-weight: 800;
+  color: #374151;
+  user-select: none;
+}
+
+.upp-check input {
+  margin-top: 3px;
+}
+
+@media (max-width: 520px) {
+  .upp-top {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .upp-value {
+    text-align: left;
+  }
+
+  .upp-grid2 {
+    grid-template-columns: 1fr;
+  }
+}

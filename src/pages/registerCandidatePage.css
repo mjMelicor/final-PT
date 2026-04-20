@@ -1,0 +1,265 @@
+.rcp-root {
+  min-height: 100vh;
+  background: #e8eaf6;
+  color: #111827;
+  font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.rcp-hero {
+  background: linear-gradient(135deg, #3b5bdb 0%, #20c997 100%);
+  color: #fff;
+  padding: 64px 14px 30px;
+}
+
+.rcp-hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.rcp-hero h1 {
+  margin: 0;
+  font-weight: 900;
+  letter-spacing: -0.6px;
+}
+
+.rcp-hero p {
+  margin-top: 10px;
+  opacity: 0.9;
+  font-weight: 700;
+}
+
+.rcp-content {
+  padding: 18px 14px 60px;
+}
+
+.rcp-card {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 10px 22px rgba(17, 24, 39, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rcp-steps {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-weight: 900;
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+.rcp-steps span {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.rcp-steps span.active {
+  color: #2f4ac0;
+  border-color: rgba(59, 91, 219, 0.25);
+  background: rgba(59, 91, 219, 0.08);
+}
+
+.rcp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rcp-field label {
+  font-weight: 900;
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+.rcp-field input,
+.rcp-field select,
+.rcp-field textarea {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+.rcp-field textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.rcp-grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.rcp-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.rcp-btn {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.rcp-btn.primary {
+  border: none;
+  background: #3b5bdb;
+  color: #fff;
+}
+
+.rcp-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.rcp-hint {
+  color: #92400e;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+.rcp-upload-hint {
+  color: #6b7280;
+  font-weight: 800;
+}
+
+.rcp-upload-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rcp-upload {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  background: #fff;
+}
+
+.rcp-upload-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.rcp-upload-title {
+  font-weight: 900;
+}
+
+.rcp-req {
+  color: #c92a2a;
+}
+
+.rcp-upload-btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(59, 91, 219, 0.25);
+  background: rgba(59, 91, 219, 0.08);
+  color: #2f4ac0;
+  cursor: pointer;
+  font-weight: 900;
+  user-select: none;
+}
+
+.rcp-upload-btn input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.rcp-upload-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: #6b7280;
+  margin-top: 8px;
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+.rcp-upload-file {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rcp-preview {
+  width: 100%;
+  max-height: 170px;
+  object-fit: cover;
+  object-position: center top;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid #eef2f7;
+}
+
+.rcp-review {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #f9fafb;
+  padding: 12px;
+}
+
+.rcp-review-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 6px;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.rcp-review-row:last-child {
+  border-bottom: none;
+}
+
+.rcp-check {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-weight: 900;
+  color: #374151;
+  user-select: none;
+}
+
+.rcp-check input {
+  margin-top: 3px;
+}
+
+.rcp-confirm p {
+  color: #374151;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 520px) {
+  .rcp-grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+

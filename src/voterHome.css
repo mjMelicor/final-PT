@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap');
 
 * {
@@ -25,6 +24,12 @@
   position: sticky;
   top: 0;
   z-index: 100;
+}
+
+.vh-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .vh-nav-brand {
@@ -175,17 +180,16 @@
 
 /* Cards */
 .vh-cards {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
-  justify-content: center;
 }
 
 .vh-card {
   background: #fff;
   border-radius: 14px;
   padding: 28px;
-  width: 380px;
+  width: 100%;
   border: 1px solid #e4e8f0;
   box-shadow: 0 2px 12px rgba(0,0,0,0.06);
   transition: transform 0.2s, box-shadow 0.2s;
@@ -196,7 +200,7 @@
   box-shadow: 0 8px 24px rgba(59,91,219,0.12);
 }
 
-/* Card Header - horizontal layout */
+/* Card Header */
 .vh-card-header {
   display: flex;
   align-items: center;
@@ -218,6 +222,14 @@
 .vh-avatar-icon {
   font-size: 1.8rem;
   filter: grayscale(1) opacity(0.4);
+}
+
+.vh-avatar-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
 }
 
 .vh-card-info {
@@ -418,10 +430,80 @@
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .vh-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
-  .vh-hero-title { font-size: 1.6rem; }
-  .vh-section { padding: 30px 20px 50px; }
-  .vh-nav { padding: 14px 20px; }
-  .vh-footer-inner { flex-direction: column; gap: 28px; }
-  .vh-card { width: 100%; }
+  .vh-hero {
+    padding: 44px 18px;
+  }
+
+  .vh-hero-title {
+    font-size: 1.7rem;
+  }
+
+  .vh-hero-sub {
+    font-size: 0.9rem;
+  }
+
+  .vh-section {
+    padding: 30px 14px 42px;
+  }
+
+  .vh-nav {
+    padding: 12px 14px;
+  }
+
+  .vh-nav-brand {
+    font-size: 1rem;
+  }
+
+  .vh-tabs {
+    width: 100%;
+  }
+
+  .vh-tab-wrapper {
+    padding: 14px 14px 0;
+  }
+
+  .vh-tab {
+    flex: 1;
+    width: 100%;
+  }
+
+  .vh-footer-inner {
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .vh-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .vh-logout-btn {
+    padding: 7px 10px;
+    font-size: 0.8rem;
+  }
+
+  .vh-levels {
+    justify-content: flex-start;
+  }
+
+  .vh-level-btn {
+    font-size: 0.8rem;
+    padding: 7px 12px;
+  }
+
+  .vh-section-title {
+    font-size: 1.35rem;
+  }
+
+  .vh-card {
+    padding: 18px;
+  }
 }

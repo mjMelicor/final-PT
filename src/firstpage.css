@@ -9,6 +9,7 @@
 /* Body */
 body {
   background: #eef0ff;
+  overflow-x: hidden;
 }
 
 /* Container */
@@ -33,7 +34,7 @@ body {
   display: flex;
   gap: 4rem;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 /* Card styling */
@@ -41,8 +42,8 @@ body {
   background: white;
   border-radius: 12px;
   padding: 2rem;
-  height: 400px;
-  width: 400px;
+  min-height: 400px;
+  width: min(420px, 100%);
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
@@ -92,6 +93,8 @@ body {
 
 .btn.primary {
   color: white;
+  background-color: #3b2fae;
+  border: 2px solid #3b2fae;
 }
 
 .voter .btn.primary { background-color: #3b2fae; }
@@ -100,11 +103,123 @@ body {
 .btn.secondary {
   background-color: transparent;
   border: 2px solid currentColor;
+  cursor: pointer;
 }
 
 .voter .btn.secondary { color: #3b2fae; }
 .candidate .btn.secondary { color: #3b7d3b; }
 
 .btn:hover {
-  opacity: 0.9;
+  opacity: 0.94;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(59, 47, 174, 0.18);
+}
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.auth-form input {
+  padding: 0.75rem 0.8rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+}
+
+.auth-form input.input-error {
+  border-color: #c92a2a;
+}
+
+.auth-form input.input-valid {
+  border-color: #2b8a3e;
+}
+
+.auth-inline-error {
+  color: #c92a2a;
+  font-size: 0.85rem;
+  margin-top: -0.35rem;
+}
+
+.auth-error-box {
+  background: #fff0f0;
+  border: 1px solid #c92a2a;
+  color: #c92a2a;
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.86rem;
+}
+
+.auth-success-box {
+  background: #edfbee;
+  border: 1px solid #2b8a3e;
+  color: #2b8a3e;
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.86rem;
+}
+
+@media (max-width: 1024px) {
+  .cards {
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  .card {
+    width: min(420px, 90vw);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem 1rem;
+  }
+
+  .container h1 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    padding: 1.2rem;
+    min-height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .container h1 {
+    font-size: 1.7rem;
+  }
+
+  .card .icon {
+    width: 90px;
+    height: 90px;
+    font-size: 2.5rem;
+  }
+
+  .card h2 {
+    font-size: 1.2rem;
+  }
+
+  .card p,
+  .btn {
+    font-size: 0.85rem;
+  }
 }
