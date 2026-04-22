@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabase";
 import OverlayModal from "../components/OverlayModal";
 import BackToHomeButton from "../components/BackToHomeButton";
+import { sendCandidateNotification } from "../services/brevoService"; // ✅ ADDED
 import "./registerCandidatePage.css";
 
 const POSITIONS = [
@@ -129,10 +130,26 @@ export default function RegisterCandidatePage() {
   const hasAllDocs = requiredDocKeys.every((k) => Boolean(draft.documents?.[k]?.name));
   const canSubmit = hasAllDocs && draft.certify;
 
-  const submit = () => {
+  // ✅ UPDATED: sends email notification after submission
+  const submit = async () => {
     if (!canSubmit) return;
     const next = { ...draft, status: "pending", submittedAt: Date.now() };
     saveDraft(next);
+
+    try {
+      if (user?.email) {
+        await sendCandidateNotification(
+          user.email,
+          user.user_metadata?.full_name || "Candidate",
+          user.user_metadata?.full_name || "Candidate",
+          draft.position
+        );
+      }
+    } catch (err) {
+      console.error("Email notification failed:", err);
+      // ✅ won't block navigation even if email fails
+    }
+
     navigate("/voter/profile");
   };
 

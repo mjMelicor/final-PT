@@ -1,6 +1,10 @@
-import { faceMemeAvatars } from "./faceMemeAvatars";
+// ✅ REMOVED: faceMemeAvatars import (file deleted)
+// avatars now generated via ui-avatars.com
 
 export const LEVELS = ["Barangay", "Municipal", "Provincial", "National"];
+
+const getAvatar = (name) =>
+  `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=random&size=128`;
 
 const mockOfficialsRaw = [
   {
@@ -20,7 +24,7 @@ const mockOfficialsRaw = [
   },
   {
     id: 2,
-    name: "Kgd. Kicki doyolabme ",
+    name: "Kgd. Kicki doyolabme",
     position: "Barangay Kagawad",
     party: "Independent",
     satisfaction: 80,
@@ -185,7 +189,7 @@ const mockOfficialsRaw = [
   },
   {
     id: 13,
-    name: "Sen. Goku uzumaki ",
+    name: "Sen. Goku uzumaki",
     position: "Senator",
     party: "PDP-Laban",
     satisfaction: 91,
@@ -456,14 +460,15 @@ const mockCandidatesRaw = [
   },
 ];
 
-export const mockOfficials = mockOfficialsRaw.map((person, index) => ({
+// ✅ UPDATED: avatars now use ui-avatars.com instead of faceMemeAvatars
+export const mockOfficials = mockOfficialsRaw.map((person) => ({
   ...person,
-  image: faceMemeAvatars[index % faceMemeAvatars.length],
+  image: getAvatar(person.name),
 }));
 
-export const mockCandidates = mockCandidatesRaw.map((person, index) => ({
+export const mockCandidates = mockCandidatesRaw.map((person) => ({
   ...person,
-  image: faceMemeAvatars[index % faceMemeAvatars.length],
+  image: getAvatar(person.name),
 }));
 
 export function getOfficialById(id) {
@@ -471,4 +476,3 @@ export function getOfficialById(id) {
   if (!Number.isFinite(numericId)) return null;
   return mockOfficials.find((o) => o.id === numericId) || null;
 }
-

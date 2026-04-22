@@ -3,13 +3,19 @@ import { useNavigate } from "react-router-dom";
 import "./voterHome.css";
 import { supabase } from "./supabase";
 import ProfileMenu from "./components/ProfileMenu";
-import { LEVELS, mockCandidates, mockOfficials } from "./mockData";
+import { LEVELS } from "./mockData";
+import { getElectionDatasets, searchDataset } from "./services/openDataService";
 
 export default function VoterHome() {
   const [activeTab, setActiveTab] = useState("officials");
   const [activeLevel, setActiveLevel] = useState("Barangay");
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+
+  const [officials, setOfficials] = useState([]);
+  const [candidates, setCandidates] = useState([]);
+  const [loadingOfficials, setLoadingOfficials] = useState(false);
+  const [loadingCandidates, setLoadingCandidates] = useState(false);
 
   useEffect(() => {
     const checkSession = async () => {
@@ -30,14 +36,45 @@ export default function VoterHome() {
     checkSession();
   }, [navigate]);
 
+  useEffect(() => {
+    if (activeTab === "officials") {
+      const fetchData = async () => {
+        setLoadingOfficials(true);
+        try {
+          const data = await searchDataset("government officials philippines");
+          setOfficials(data || []);
+        } catch (err) {
+          console.error("Failed to fetch officials:", err);
+        } finally {
+          setLoadingOfficials(false);
+        }
+      };
+      fetchData();
+    }
+  }, [activeTab]);
+
+  useEffect(() => {
+    if (activeTab === "candidates") {
+      const fetchData = async () => {
+        setLoadingCandidates(true);
+        try {
+          const data = await getElectionDatasets();
+          setCandidates(data || []);
+        } catch (err) {
+          console.error("Failed to fetch election datasets:", err);
+        } finally {
+          setLoadingCandidates(false);
+        }
+      };
+      fetchData();
+    }
+  }, [activeTab]);
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
     localStorage.removeItem("userRole");
     navigate("/", { replace: true });
   };
-
-  const data = activeTab === "officials" ? mockOfficials : mockCandidates;
-  const filtered = data.filter((item) => item.level === activeLevel);
 
   const openProfile = (item) => {
     if (activeTab === "officials") {
@@ -47,9 +84,11 @@ export default function VoterHome() {
     alert("Candidate full profile page is coming soon.");
   };
 
+  const data = activeTab === "officials" ? officials : candidates;
+  const isLoading = activeTab === "officials" ? loadingOfficials : loadingCandidates;
+
   return (
     <div className="vh-root">
-      {/* Navbar */}
       <nav className="vh-nav">
         <div className="vh-nav-brand">
           <span className="vh-nav-icon">⊟</span>
@@ -63,7 +102,6 @@ export default function VoterHome() {
         </div>
       </nav>
 
-      {/* Hero */}
       <header className="vh-hero">
         <h1 className="vh-hero-title">Philippine Political Platform</h1>
         <p className="vh-hero-sub">
@@ -72,7 +110,6 @@ export default function VoterHome() {
         </p>
       </header>
 
-      {/* Tabs */}
       <div className="vh-tab-wrapper">
         <div className="vh-tabs">
           <button
@@ -96,7 +133,6 @@ export default function VoterHome() {
         </div>
       </div>
 
-      {/* Main Section */}
       <section className="vh-section">
         <h2 className="vh-section-title">
           {activeTab === "officials" ? "Current Officials" : "Running Candidates"}
@@ -107,7 +143,6 @@ export default function VoterHome() {
             : "Discover candidates running in the upcoming elections."}
         </p>
 
-        {/* Level Filter */}
         <div className="vh-levels">
           {LEVELS.map((level) => (
             <button
@@ -120,73 +155,67 @@ export default function VoterHome() {
           ))}
         </div>
 
-        {/* Cards */}
-        <div className="vh-cards">
-          {filtered.length === 0 ? (
-            <p className="vh-empty">
-              No {activeTab === "officials" ? "officials" : "candidates"} found
-              for {activeLevel} level.
-            </p>
-          ) : (
-            filtered.map((item) => (
-              <div
-                key={item.id}
-                className="vh-card"
-                role={activeTab === "officials" ? "button" : undefined}
-                tabIndex={activeTab === "officials" ? 0 : undefined}
-                onClick={() => (activeTab === "officials" ? openProfile(item) : null)}
-                onKeyDown={(e) => {
-                  if (activeTab !== "officials") return;
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    openProfile(item);
-                  }
-                }}
-              >
-                <div className="vh-card-header">
-                  <div className="vh-avatar">
-                    <img src={item.image} alt={item.name} className="vh-avatar-img" />
-                  </div>
-                  <div className="vh-card-info">
-                    <h3 className="vh-card-name">{item.name}</h3>
-                    <p className="vh-card-position">{item.position}</p>
-                    <span className="vh-card-party">{item.party}</span>
-                  </div>
-                </div>
+        {isLoading && (
+          <p className="vh-empty">Loading data from Open Data Philippines...</p>
+        )}
 
-                {activeTab === "officials" && (
-                  <div className="vh-badges">
-                    <span className="vh-badge green">
-                      ✓ Satisfaction: {item.satisfaction}%
-                    </span>
-                    <span className="vh-badge green">
-                      ◎ Transparency: {item.transparency}%
-                    </span>
-                  </div>
-                )}
-
-                <div className="vh-platform">
-                  <p className="vh-platform-title">Campaign Platforms</p>
-                  <ul className="vh-platform-list">
-                    {item.platforms.map((p, i) => (
-                      <li key={i}>{p}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <button
-                  className="vh-profile-btn"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    openProfile(item);
+        {!isLoading && (
+          <div className="vh-cards">
+            {data.length === 0 ? (
+              <p className="vh-empty">
+                No {activeTab === "officials" ? "officials" : "candidates"} data found.
+              </p>
+            ) : (
+              data.map((item) => (
+                <div
+                  key={item.id}
+                  className="vh-card"
+                  role={activeTab === "officials" ? "button" : undefined}
+                  tabIndex={activeTab === "officials" ? 0 : undefined}
+                  onClick={() => activeTab === "officials" ? openProfile(item) : null}
+                  onKeyDown={(e) => {
+                    if (activeTab !== "officials") return;
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      openProfile(item);
+                    }
                   }}
                 >
-                  View Full Profile
-                </button>
-              </div>
-            ))
-          )}
-        </div>
+                  <div className="vh-card-header">
+                    <div className="vh-card-info">
+                      <h3 className="vh-card-name">{item.title}</h3>
+                      <p className="vh-card-position">
+                        {item.organization?.title || "Open Data Philippines"}
+                      </p>
+                      <span className="vh-card-party">
+                        {item.metadata_modified
+                          ? `Updated: ${new Date(item.metadata_modified).toLocaleDateString()}`
+                          : ""}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="vh-platform">
+                    <p className="vh-platform-title">Description</p>
+                    <p>{item.notes?.slice(0, 200) || "No description available."}</p>
+                  </div>
+
+                  {item.url && (
+                    <a
+                      href={item.url}
+                      target ="_blank"
+                      rel="noreferrer"
+                      className="vh-profile-btn"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      View Full Data →
+                    </a>
+                  )}
+                </div>
+              ))
+            )}
+          </div>
+        )}
       </section>
     </div>
   );
